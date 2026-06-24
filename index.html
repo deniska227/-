@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тебя ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="background">
+    <span class="heart">❤</span>
+    <span class="heart">❤</span>
+    <span class="heart">❤</span>
+    <span class="heart">❤</span>
+    <span class="heart">❤</span>
+    <span class="heart">❤</span>
+</div>
+
+    <main class="hero">
+
+        <div class="container">
+
+            <span class="subtitle">
+                💌 Небольшой сюрприз только для тебя
+            </span>
+
+            <h1>
+                Для самой прекрасной девушки ❤️
+            </h1>
+
+            <p>
+                Я решил сделать кое-что необычное.
+                Просто потому что ты этого заслуживаешь.
+            </p>
+
+           <button id="startBtn">💖 Открыть сюрприз</button>
+
+        </div>
+
+    </main>
+
+
+<!-- переход-сердце -->
+<div class="transition" id="transition">
+    <div class="big-heart">❤</div>
+</div>
+
+<script>
+const btn = document.getElementById("startBtn");
+const transition = document.getElementById("transition");
+
+btn.addEventListener("click", () => {
+
+    transition.classList.add("active");
+
+    setTimeout(() => {
+
+        window.location.href = "page2.html";
+
+    }, 700);
+
+});
+</script>
+</body>
+</html>
