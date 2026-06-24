@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Чат ❤️</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ffe6ec,#ffd1dc);
+font-family:Georgia,serif;
+}
+
+/* чат */
+.chat{
+width:380px;
+height:600px;
+background:rgba(255,255,255,.5);
+backdrop-filter:blur(15px);
+border-radius:30px;
+box-shadow:0 20px 60px rgba(0,0,0,.15);
+display:flex;
+flex-direction:column;
+overflow:hidden;
+}
+
+.header{
+padding:15px;
+text-align:center;
+font-weight:bold;
+color:#7a2f4d;
+background:rgba(255,255,255,.3);
+}
+
+.messages{
+flex:1;
+padding:15px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+/* сообщение */
+.msg{
+max-width:70%;
+padding:10px 14px;
+border-radius:18px;
+font-size:15px;
+line-height:1.4;
+position:relative;
+animation:pop .3s ease;
+cursor:pointer;
+}
+
+@keyframes pop{
+from{transform:scale(.8);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+.left{
+align-self:flex-start;
+background:rgba(255,255,255,.6);
+color:#7a2f4d;
+border-bottom-left-radius:5px;
+}
+
+.right{
+align-self:flex-end;
+background:linear-gradient(135deg,#ff7aa8,#ff4f8b);
+color:white;
+border-bottom-right-radius:5px;
+}
+
+/* реакции */
+.reaction{
+position:absolute;
+bottom:-12px;
+right:-10px;
+font-size:14px;
+background:white;
+border-radius:20px;
+padding:2px 6px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+cursor:pointer;
+}
+
+/* звук (скрытый) */
+audio{
+display:none;
+}
+
+#nextBtn{
+display:block;
+margin:10px auto 15px;
+padding:12px 25px;
+text-align:center;
+text-decoration:none;
+
+border-radius:30px;
+background:linear-gradient(135deg,#ff7aa8,#ff4f8b);
+color:white;
+
+font-size:16px;
+font-weight:bold;
+
+box-shadow:0 10px 25px rgba(255,90,150,.3);
+transition:.3s;
+}
+
+#nextBtn:hover{
+transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<audio id="sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a8b8b6.mp3?filename=message-tone-31460.mp3"></audio>
+
+<div class="chat">
+
+<div class="header">Первый коннект между нами</div>
+
+<div class="messages" id="messages"></div>
+<a href="page7.html" id="nextBtn">Продолжение</a>
+
+</div>
+
+<script>
+
+const chat = document.getElementById("messages");
+const sound = document.getElementById("sound");
+
+const messages = [
+{t:"left", text:"*Отправила фото*"},
+{t:"right", text:"Эээээ, котак жеме"},
+{t:"left", text:"Че"},
+{t:"right", text:"Хочешь общаться чтоль?"},
+{t:"left", text:"А че бы нет"},
+{t:"right", text:"Хах, ну давай"},
+{t:"left", text:"Смотрии это тебе - *Отправила сердце*"},
+{t:"right", text:"Ого, это мило"},
+{t:"left", text:"Ха-ха-ха"}
+];
+
+let i = 0;
+
+// добавление сообщений
+function addMessage(){
+
+if(i >= messages.length) return;
+
+let m = messages[i];
+
+let div = document.createElement("div");
+div.className = "msg " + m.t;
+div.innerText = m.text;
+
+// реакция по клику
+div.onclick = () => {
+if(div.querySelector(".reaction")) return;
+
+let r = document.createElement("div");
+r.className = "reaction";
+r.innerText = "❤️";
+div.appendChild(r);
+};
+
+chat.appendChild(div);
+chat.scrollTop = chat.scrollHeight;
+
+// 🔊 звук
+sound.currentTime = 0;
+sound.play();
+
+i++;
+setTimeout(addMessage, 1200 + Math.random()*800);
+}
+
+addMessage();
+
+let soundUnlocked = false;
+
+document.body.addEventListener("click", () => {
+if (!soundUnlocked) {
+sound.play().then(() => {
+sound.pause();
+sound.currentTime = 0;
+soundUnlocked = true;
+});
+}
+});
+function goNext(){
+window.location.href = "page7.html";
+}
+
+
+</script>
+
+</body>
+</html>

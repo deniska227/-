@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Последняя страница ❤️</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Georgia,serif;
+background:linear-gradient(135deg,#ffe6ec,#ffd1dc);
+overflow:hidden;
+}
+
+/* сердечки фон */
+.heart{
+position:absolute;
+font-size:22px;
+opacity:.2;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(110vh) rotate(0deg);}
+100%{transform:translateY(-20vh) rotate(360deg);}
+}
+
+/* карточка */
+.card{
+position:relative;
+z-index:2;
+width:420px;
+padding:40px;
+border-radius:25px;
+background:rgba(255,255,255,.55);
+backdrop-filter:blur(15px);
+box-shadow:0 20px 60px rgba(0,0,0,.15);
+text-align:center;
+}
+
+/* текст */
+#text{
+font-size:28px;
+color:#7a2f4d;
+font-weight:bold;
+min-height:140px;
+line-height:1.4;
+}
+
+/* кнопки */
+.buttons{
+margin-top:25px;
+display:flex;
+gap:15px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+button{
+padding:12px 22px;
+border:none;
+border-radius:30px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.yes{
+background:linear-gradient(135deg,#ff4f8b,#ff7aa8);
+color:white;
+}
+
+.no{
+background:white;
+color:#7a2f4d;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+#result{
+margin-top:20px;
+font-size:20px;
+color:#7a2f4d;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="hearts"></div>
+
+<div class="card">
+
+<div id="text"></div>
+
+<div class="buttons">
+<button class="yes" onclick="yes()">Да</button>
+<button class="no" onclick="no()">Нет</button>
+</div>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+// фон
+function hearts(){
+for(let i=0;i<25;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(4+Math.random()*5)+"s";
+document.body.appendChild(h);
+}
+}
+hearts();
+
+// печать текста
+const msg =
+"И вот мы здесь...\n\nПосле всех этих страниц, у меня только один вопрос \n\nТебе все понравилось?";
+
+let i=0;
+
+function type(){
+if(i < msg.length){
+document.getElementById("text").innerHTML += msg.charAt(i);
+i++;
+setTimeout(type,40);
+}
+}
+type();
+
+// выбор
+function yes(){
+document.getElementById("result").innerHTML =
+"Ну мояяяяя ❤️\nЭто не первый и не последний такой подарок";
+
+setTimeout(()=>{
+document.body.innerHTML = `
+<div style="height:100vh;display:flex;justify-content:center;align-items:center;
+font-family:Georgia;font-size:32px;text-align:center;color:#7a2f4d;">
+Продолжение уже не в сайте…<br>а в реальной переписке 💌
+</div>`;
+},2000);
+}
+
+function no(){
+document.getElementById("result").innerHTML =
+"Понял… ты точноо ахуела";
+}
+
+</script>
+
+</body>
+</html>

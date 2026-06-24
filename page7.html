@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Продолжение 💌</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Georgia,serif;
+background:linear-gradient(135deg,#ffe6ec,#ffd1dc);
+overflow:hidden;
+}
+
+/* фон сердечек */
+.heart{
+position:absolute;
+font-size:22px;
+opacity:.25;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(110vh) rotate(0deg);}
+100%{transform:translateY(-20vh) rotate(360deg);}
+}
+
+/* карточка */
+.card{
+position:relative;
+z-index:2;
+width:380px;
+padding:35px;
+border-radius:25px;
+background:rgba(255,255,255,.5);
+backdrop-filter:blur(15px);
+box-shadow:0 20px 60px rgba(0,0,0,.15);
+text-align:center;
+}
+
+/* текст */
+#text{
+font-size:26px;
+color:#7a2f4d;
+font-weight:bold;
+min-height:120px;
+line-height:1.4;
+}
+
+/* кнопка */
+button{
+margin-top:20px;
+padding:12px 28px;
+border:none;
+border-radius:30px;
+background:linear-gradient(135deg,#ff7aa8,#ff4f8b);
+color:white;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="hearts"></div>
+
+<div class="card">
+
+<div id="text"></div>
+
+<button onclick="next()">Дальше</button>
+
+</div>
+
+<script>
+
+// фон
+function hearts(){
+for(let i=0;i<20;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(4+Math.random()*5)+"s";
+document.body.appendChild(h);
+}
+}
+hearts();
+
+// печать текста
+const msg = "После этой переписки я понял, что ты та самая...\n\nИ я очень рад что встретил тебя, люблю тебя Никипузик❤️";
+
+let i=0;
+
+function type(){
+if(i < msg.length){
+document.getElementById("text").innerHTML += msg.charAt(i);
+i++;
+setTimeout(type,45);
+}
+}
+type();
+
+// переход дальше
+function next(){
+window.location.href = "page8.html";
+}
+
+</script>
+
+</body>
+</html>

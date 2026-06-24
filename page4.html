@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Моё сердце ❤️</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:Georgia,serif;
+
+overflow:hidden;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+height:100vh;
+
+background:linear-gradient(-45deg,
+#ffe6ee,
+#ffd6e8,
+#fff3f7,
+#ffe2d9,
+#ffd4df);
+
+background-size:400% 400%;
+
+animation:bg 15s infinite ease;
+
+}
+
+@keyframes bg{
+
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+
+}
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background-image:
+radial-gradient(rgba(255,255,255,.8) 1px,transparent 1px);
+
+background-size:45px 45px;
+
+opacity:.3;
+
+animation:stars 12s linear infinite;
+
+}
+
+@keyframes stars{
+
+from{transform:translateY(0);}
+to{transform:translateY(-45px);}
+
+}
+
+.container{
+
+text-align:center;
+
+position:relative;
+
+z-index:2;
+
+}
+
+.bigHeart{
+
+font-size:170px;
+
+cursor:pointer;
+
+user-select:none;
+
+animation:pulse 1.6s infinite;
+
+transition:.4s;
+
+}
+
+.bigHeart:hover{
+
+transform:scale(1.1);
+
+}
+
+@keyframes pulse{
+
+0%{transform:scale(1);}
+50%{transform:scale(1.12);}
+100%{transform:scale(1);}
+
+}
+
+h2{
+
+margin-top:20px;
+
+font-size:36px;
+
+color:#934d67;
+
+}
+
+p{
+
+margin-top:10px;
+
+font-size:20px;
+
+color:#8f5f70;
+
+}
+
+.letter{
+
+display:none;
+
+margin-top:40px;
+
+padding:35px;
+
+width:650px;
+
+max-width:90vw;
+
+background:rgba(255,255,255,.45);
+
+backdrop-filter:blur(20px);
+
+border-radius:30px;
+
+box-shadow:0 20px 50px rgba(0,0,0,.1);
+
+animation:show .8s;
+
+}
+
+@keyframes show{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.letter h3{
+
+font-size:35px;
+
+margin-bottom:20px;
+
+color:#a44d6d;
+
+}
+
+.letter p{
+
+font-size:22px;
+
+line-height:1.8;
+
+}
+
+.next{
+
+display:none;
+
+margin:35px auto;
+
+padding:18px 45px;
+
+font-size:22px;
+
+border:none;
+
+border-radius:50px;
+
+background:linear-gradient(135deg,#ff7aa8,#ff4d88);
+
+color:white;
+
+cursor:pointer;
+
+box-shadow:0 15px 40px rgba(255,80,140,.35);
+
+animation:pulse 2s infinite;
+
+}
+
+.heart{
+
+position:fixed;
+
+top:-40px;
+
+font-size:28px;
+
+pointer-events:none;
+
+animation:fall linear forwards;
+
+}
+
+@keyframes fall{
+
+0%{
+
+transform:translateY(-30px) rotate(0deg);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(110vh) rotate(360deg);
+
+opacity:0;
+
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="bigHeart" id="heart">
+❤️
+</div>
+
+<h2>Нажми на моё сердце</h2>
+
+<p>Оно хочет тебе кое-что сказать...</p>
+
+<div class="letter" id="letter">
+
+<h3>💌</h3>
+
+<p>
+
+Если ты читаешь это...
+
+значит ты дошла до самого конца ❤️
+
+<br><br>
+
+Я просто хотел сделать для тебя что-нибудь необычное.
+
+Чтобы ты улыбнулась.
+
+Чтобы ещё раз напомнить,
+
+как сильно ты для меня важна.
+
+<br><br>
+
+Спасибо тебе за каждый день,
+
+за каждую улыбку,
+
+за каждое сообщение,
+
+за то, что ты просто есть.
+
+<br><br>
+
+Я очень люблю тебя ❤️
+
+</p>
+
+<button class="next" id="nextBtn"
+onclick="location.href='page5.html'">
+
+❤️ Последний сюрприз
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const heart=document.getElementById("heart");
+
+heart.onclick=()=>{
+
+heart.style.pointerEvents="none";
+
+heart.style.transform="scale(1.4)";
+
+hearts();
+
+setTimeout(()=>{
+
+document.getElementById("letter").style.display="block";
+
+},700);
+
+setTimeout(()=>{
+
+document.getElementById("nextBtn").style.display="block";
+
+},2500);
+
+}
+
+function hearts(){
+
+const arr=["❤️","💖","💕","💗","💘","💞"];
+
+for(let i=0;i<120;i++){
+
+setTimeout(()=>{
+
+const h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML=arr[Math.floor(Math.random()*arr.length)];
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.fontSize=(20+Math.random()*30)+"px";
+
+h.style.animationDuration=(4+Math.random()*3)+"s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{
+
+h.remove();
+
+},7000);
+
+},i*45);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

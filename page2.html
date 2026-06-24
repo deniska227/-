@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Для тебя ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Georgia,serif;
+    color:#5b4343;
+    overflow-x:hidden;
+
+    background:linear-gradient(-45deg,
+    #ffe6ee,
+    #ffd6e8,
+    #fff2f5,
+    #ffe2d9,
+    #ffd4df);
+
+    background-size:400% 400%;
+
+    animation:bgMove 15s ease infinite;
+}
+
+@keyframes bgMove{
+
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+
+}
+
+/* блестки */
+
+body::before{
+
+content:"";
+
+position:fixed;
+inset:0;
+
+background-image:
+radial-gradient(rgba(255,255,255,.9) 1px,transparent 1px);
+
+background-size:45px 45px;
+
+opacity:.35;
+
+animation:stars 12s linear infinite;
+
+pointer-events:none;
+
+}
+
+@keyframes stars{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(-45px);
+}
+
+}
+
+/* сердечки */
+
+.hearts-layer{
+
+position:fixed;
+inset:0;
+
+pointer-events:none;
+
+overflow:hidden;
+
+z-index:0;
+
+}
+
+.sticker{
+
+position:absolute;
+
+bottom:-80px;
+
+opacity:.18;
+
+animation:floatUp linear infinite;
+
+filter:blur(.4px);
+
+}
+
+.sticker:nth-child(1){left:5%;font-size:22px;animation-duration:14s;}
+.sticker:nth-child(2){left:18%;font-size:30px;animation-duration:18s;}
+.sticker:nth-child(3){left:35%;font-size:24px;animation-duration:13s;}
+.sticker:nth-child(4){left:52%;font-size:28px;animation-duration:17s;}
+.sticker:nth-child(5){left:68%;font-size:22px;animation-duration:20s;}
+.sticker:nth-child(6){left:82%;font-size:32px;animation-duration:16s;}
+.sticker:nth-child(7){left:92%;font-size:20px;animation-duration:14s;}
+.sticker:nth-child(8){left:45%;font-size:34px;animation-duration:19s;}
+
+@keyframes floatUp{
+
+0%{
+
+transform:translateY(0) rotate(0deg);
+opacity:0;
+
+}
+
+15%{
+
+opacity:.3;
+
+}
+
+100%{
+
+transform:translateY(-130vh) rotate(35deg);
+
+opacity:0;
+
+}
+
+}
+
+/* контейнер */
+
+.page{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:60px 20px;
+
+position:relative;
+
+z-index:2;
+
+}
+
+.container{
+
+width:100%;
+
+max-width:950px;
+
+text-align:center;
+
+}
+
+/* заголовок */
+
+h1{
+
+font-size:58px;
+
+margin-bottom:12px;
+
+color:#8b5166;
+
+text-shadow:0 5px 20px rgba(255,255,255,.6);
+
+animation:fadeDown 1s;
+
+}
+
+p{
+
+font-size:20px;
+
+opacity:.8;
+
+margin-bottom:40px;
+
+}
+
+@keyframes fadeDown{
+
+from{
+
+opacity:0;
+transform:translateY(-40px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+/* сетка */
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+gap:24px;
+
+}
+
+/* карточки */
+
+.card{
+
+height:170px;
+
+perspective:1200px;
+
+cursor:pointer;
+
+opacity:0;
+
+transform:translateY(50px);
+
+transition:opacity .7s,transform .7s;
+
+}
+
+.card.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+.card-inner{
+
+position:relative;
+
+width:100%;
+height:100%;
+
+transition:.8s;
+
+transform-style:preserve-3d;
+
+}
+
+.card.open .card-inner{
+
+transform:rotateY(180deg);
+
+}
+
+.front,
+.back{
+
+position:absolute;
+
+inset:0;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
+border-radius:28px;
+
+backface-visibility:hidden;
+
+background:rgba(255,255,255,.38);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.6);
+
+box-shadow:
+
+0 20px 45px rgba(0,0,0,.08);
+
+}
+
+.front{
+
+font-size:23px;
+
+font-weight:bold;
+
+color:#a34f73;
+
+overflow:hidden;
+
+}
+
+.front::after{
+
+content:"💌";
+
+position:absolute;
+
+font-size:50px;
+
+bottom:15px;
+
+right:20px;
+
+opacity:.25;
+
+}
+
+.back{
+
+transform:rotateY(180deg);
+
+font-size:18px;
+
+line-height:1.5;
+
+background:rgba(255,228,237,.65);
+
+}
+
+.card:hover{
+
+transform:translateY(-8px);
+
+}
+
+/* кнопка */
+
+button{
+
+margin-top:45px;
+
+padding:18px 55px;
+
+font-size:22px;
+
+font-weight:bold;
+
+border:none;
+
+border-radius:50px;
+
+cursor:pointer;
+
+color:white;
+
+background:linear-gradient(135deg,#ff7ba8,#ff4f8b);
+
+box-shadow:0 15px 35px rgba(255,90,150,.35);
+
+transition:.35s;
+
+animation:pulse 2s infinite;
+
+}
+
+button:hover{
+
+transform:scale(1.06);
+
+}
+
+@keyframes pulse{
+
+0%{transform:scale(1);}
+50%{transform:scale(1.05);}
+100%{transform:scale(1);}
+
+}
+
+/* сердечки при открытии */
+
+.spark{
+
+position:fixed;
+
+font-size:22px;
+
+pointer-events:none;
+
+animation:spark .9s forwards;
+
+z-index:999;
+
+}
+
+@keyframes spark{
+
+0%{
+
+opacity:1;
+transform:translate(0,0) scale(1);
+
+}
+
+100%{
+
+opacity:0;
+transform:translate(var(--x),var(--y)) scale(.3);
+
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hearts-layer">
+    <div class="sticker">❤️</div>
+    <div class="sticker">💖</div>
+    <div class="sticker">💕</div>
+    <div class="sticker">💗</div>
+    <div class="sticker">💘</div>
+    <div class="sticker">💞</div>
+    <div class="sticker">💓</div>
+    <div class="sticker">❤️</div>
+</div>
+
+<audio id="bgmusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_7c7b3b8f6a.mp3?filename=soft-piano-ambient-121763.mp3" type="audio/mp3">
+</audio>
+
+<div class="page">
+
+<div class="container">
+
+<h1>Наши воспоминания ❤️</h1>
+
+<p>Нажимай на конверты и открывай наши маленькие секреты 💌</p>
+
+<div id="counter" style="margin-bottom:25px;font-size:22px;color:#9a5872;">
+0 / 5 открыто ❤️
+</div>
+
+<div class="cards">
+
+<div class="card" onclick="openCard(this,event)">
+<div class="card-inner">
+<div class="front">
+💌 Наше знакомство
+</div>
+<div class="back">
+Мы познакомились максимально случайно, но именно эта случайность стала самым лучшим событием ❤️
+</div>
+</div>
+</div>
+
+<div class="card" onclick="openCard(this,event)">
+<div class="card-inner">
+<div class="front">
+🧸 Первый подарок
+</div>
+<div class="back">
+Я до сих пор помню твои эмоции. Тогда я понял, что очень хочу делать тебя счастливой ❤️
+</div>
+</div>
+</div>
+
+<div class="card" onclick="openCard(this,event)">
+<div class="card-inner">
+<div class="front">
+💌 Первое признание
+</div>
+<div class="back">
+Ты сказала, что любишь меня первой... и это навсегда останется у меня в памяти 🥹
+</div>
+</div>
+</div>
+
+<div class="card" onclick="openCard(this,event)">
+<div class="card-inner">
+<div class="front">
+📅 Самая важная дата
+</div>
+<div class="back">
+26.03.26 ❤️
+День, который стал для меня особенным.
+</div>
+</div>
+</div>
+
+<div class="card" onclick="openCard(this,event)">
+<div class="card-inner">
+<div class="front">
+❤️ Самый главный секрет
+</div>
+<div class="back">
+Какое бы расстояние между нами ни было...
+Ты всегда будешь занимать особое место в моём сердце ❤️
+</div>
+</div>
+</div>
+
+</div>
+
+<button onclick="window.location.href='page3.html'">
+❤️ Дальше
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const audio=document.getElementById("bgmusic");
+
+document.addEventListener("click",()=>{
+
+audio.volume=.12;
+
+audio.play();
+
+},{once:true});
+
+const cards=document.querySelectorAll(".card");
+
+window.onload=()=>{
+
+cards.forEach((card,index)=>{
+
+setTimeout(()=>{
+
+card.classList.add("show");
+
+},index*220);
+
+});
+
+};
+
+let opened=0;
+
+function openCard(card,e){
+
+if(!card.classList.contains("open")){
+
+opened++;
+
+document.getElementById("counter").innerHTML=
+opened+" / 5 открыто ❤️";
+
+explode(e.clientX,e.clientY);
+
+}
+
+card.classList.toggle("open");
+
+}
+
+function explode(x,y){
+
+const arr=["❤️","💖","💕","💗","💘","💞"];
+
+for(let i=0;i<22;i++){
+
+const s=document.createElement("div");
+
+s.className="spark";
+
+s.innerHTML=arr[Math.floor(Math.random()*arr.length)];
+
+s.style.left=x+"px";
+
+s.style.top=y+"px";
+
+s.style.setProperty("--x",(Math.random()*260-130)+"px");
+
+s.style.setProperty("--y",(Math.random()*260-130)+"px");
+
+document.body.appendChild(s);
+
+setTimeout(()=>{
+
+s.remove();
+
+},900);
+
+}
+
+}
+
+// Все открыты
+
+const observer=setInterval(()=>{
+
+if(opened===5){
+
+document.getElementById("counter").innerHTML=
+"💖 Все воспоминания открыты 💖";
+
+clearInterval(observer);
+
+}
+
+},300);
+
+</script>
+
+</body>
+</html>

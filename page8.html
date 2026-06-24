@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Колесо желаний ❤️</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Georgia,serif;
+background:linear-gradient(135deg,#ffe6ec,#ffd1dc);
+overflow:hidden;
+}
+
+/* фон */
+.heart{
+position:absolute;
+font-size:20px;
+opacity:.2;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(110vh) rotate(0deg);}
+100%{transform:translateY(-20vh) rotate(360deg);}
+}
+
+.container{
+text-align:center;
+position:relative;
+z-index:2;
+}
+
+/* стрелка */
+.pointer{
+width:0;
+height:0;
+border-left:14px solid transparent;
+border-right:14px solid transparent;
+border-bottom:25px solid #7a2f4d;
+margin:0 auto 10px;
+}
+
+/* колесо */
+#wheel{
+width:320px;
+height:320px;
+border-radius:50%;
+border:8px solid white;
+margin:0 auto;
+position:relative;
+
+transition:transform 4s cubic-bezier(.2,.8,.2,1);
+
+background:conic-gradient(
+#ff7aa8 0deg 60deg,
+#ff4f8b 60deg 120deg,
+#ff7aa8 120deg 180deg,
+#ff4f8b 180deg 240deg,
+#ff7aa8 240deg 300deg,
+#ff4f8b 300deg 360deg
+);
+
+box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+/* сектора (НОРМАЛЬНЫЕ) */
+.slice{
+position:absolute;
+width:50%;
+height:50%;
+top:50%;
+left:50%;
+transform-origin:0 0;
+background:linear-gradient(135deg,#ff7aa8,#ff4f8b);
+clip-path:polygon(0 0,100% 0,0 100%);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:13px;
+font-weight:bold;
+}
+
+/* кнопка */
+button{
+margin-top:25px;
+padding:12px 28px;
+border:none;
+border-radius:30px;
+background:linear-gradient(135deg,#ff4f8b,#ff7aa8);
+color:white;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* результат */
+#result{
+margin-top:20px;
+font-size:22px;
+color:#7a2f4d;
+font-weight:bold;
+}
+
+#nextBtn{
+display:block;
+margin:10px auto 15px;
+padding:12px 25px;
+text-align:center;
+text-decoration:none;
+
+border-radius:30px;
+background:linear-gradient(135deg,#ff7aa8,#ff4f8b);
+color:white;
+
+font-size:16px;
+font-weight:bold;
+
+box-shadow:0 10px 25px rgba(255,90,150,.3);
+transition:.3s;
+}
+
+#nextBtn:hover{
+transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="hearts"></div>
+
+<div class="container">
+
+<div class="pointer"></div>
+
+<div class="wheel" id="wheel">
+
+<div class="slice" style="transform:rotate(0deg)">Стич</div>
+<div class="slice" style="transform:rotate(60deg)">Азиатский набор</div>
+<div class="slice" style="transform:rotate(120deg)">Лего цветы</div>
+<div class="slice" style="transform:rotate(180deg)">Буено</div>
+<div class="slice" style="transform:rotate(240deg)">Браслет ЛАКОСТЕ</div>
+<div class="slice" style="transform:rotate(300deg)">Ничего</div>
+
+</div>
+
+<button onclick="spin()">Крутить</button>
+<a href="page9.html" id="nextBtn">Конец</a>
+<div id="result"></div>
+
+</div>
+
+<script>
+
+// фон сердечек
+function hearts(){
+for(let i=0;i<20;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(4+Math.random()*5)+"s";
+document.body.appendChild(h);
+}
+}
+hearts();
+
+let wheel = document.getElementById("wheel");
+let result = document.getElementById("result");
+
+let items = ["Стич","Азиатский набор сладостей","Лего цветы","Буено","Браслет ЛАКОСТЕ","Ничего"];
+
+let deg = 0;
+
+function spin(){
+
+let rand = Math.floor(Math.random()*6);
+deg += 360*5 + (360/6)*rand;
+
+wheel.style.transform = `rotate(${deg}deg)`;
+
+setTimeout(()=>{
+result.innerText = "Выпало: " + items[rand];
+},4200);
+
+}
+
+</script>
+
+</body>
+</html>
